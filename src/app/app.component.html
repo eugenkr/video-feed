@@ -1,3 +1,26 @@
-<h1>
-  {{title}}
-</h1>
+<div class="fb-root"></div>
+
+<!--<video *ngFor="let f of feed" controls>-->
+  <!--<source [src]="f.source === 'url' ? f.url : f.videoId">-->
+<!--</video>-->
+
+
+<!--
+<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2F127093027351546%2Fvideos%2F1401741466553356%2F&show_text=0&width=560" width="560" height="315" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Ffacebook%2Fvideos%2F1052114818157758" width="560" height="315" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+-->
+
+<!--
+<video-componentideo videoId="kI5FYpwZMXU___"></video-componentideo>
+<video-componentideo videoId="kI5FYpwZMXU"></video-componentideo>
+<video-componentideo videoId="JGSGhb8tzoA"></video-componentideo>
+-->
+
+<div *ngFor="let v of feed" [ngSwitch]="v.source">
+  <app-youtube-video *ngSwitchCase="'youtube'" [cfg]="v"></app-youtube-video>
+  <app-facebook-video *ngSwitchCase="'facebook'" [cfg]="v"></app-facebook-video>
+  <app-url-video *ngSwitchCase="'url'" [cfg]="v"></app-url-video>
+</div>
+
+<!--<div class="fb-video" data-href="https://www.facebook.com/1750129398348751/videos/1835113183183705/" data-width="500" data-show-text="false"></div>-->
+

@@ -1,0 +1,9 @@
+<div class="player-wrapper" #playerWrapper>
+    <div class="player-header">
+        <div class="title">{{ cfg.title || 'No title' }}</div>
+        <div class="views">{{ cfg.views }}</div>
+    </div>
+    <div class="player-body">
+        <video controls #videoPlayer [src]="cfg.url"></video>
+    </div>
+</div>

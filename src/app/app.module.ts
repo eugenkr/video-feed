@@ -4,17 +4,27 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { VideoService } from './services/video.service';
+import { PlayerService } from './services/player.service';
+import { ErrorService } from './services/error.service';
+
+import { YoutubeVideoComponent } from './components/youtube-video/youtube-video.component';
+import { FacebookVideoComponent } from './components/facebook-video/facebook-video.component';
+import { UrlVideoComponent } from './components/url-video/url-video.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    YoutubeVideoComponent,
+    FacebookVideoComponent,
+    UrlVideoComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [VideoService, PlayerService, ErrorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,13 @@
+<div class="player-wrapper">
+    <div class="player-header">
+        <div class="title">{{ cfg.title || 'No title' }}</div>
+        <div class="views">{{ cfg.views }}</div>
+    </div>
+    <div class="player-body">
+        <div class="fb-video"
+             id="{{ cfg.videoId }}"
+             [attr.data-href]="videoUrl"
+             [attr.data-width]="560"
+             [attr.data-allowfullscreen]="true"></div>
+    </div>
+</div>
