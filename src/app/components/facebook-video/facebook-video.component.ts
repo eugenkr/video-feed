@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ElementRef, OnDestroy } from '@angular/core';
 
 import { PlayerService } from '../../services/player.service';
-import { ErrorService } from '../../services/error.service';
+import { DomService } from '../../services/dom.service';
 
 import { Video } from '../../types/video';
 
@@ -13,7 +13,7 @@ export class FacebookVideoComponent implements OnInit, OnDestroy {
   private player: any;
   private listeners: Array<any> = [];
 
-  errorMessage = 'Facebook video is unavailable!';
+  errorMessage = 'Facebook video is missing!';
   videoUrl = '';
 
   @Input() cfg: Video;
@@ -31,16 +31,17 @@ export class FacebookVideoComponent implements OnInit, OnDestroy {
     };
 
     this.playerService.getFBPlayers().subscribe(players => {
+      DomService.removeLoader(this.el.nativeElement);
+
       this.player = players[this.cfg.videoId];
 
       if (!this.player) {
-        ErrorService.placeError(errorCfg);
+        DomService.placeError(errorCfg);
 
         return null;
       }
 
-      const listener = this.player
-        .subscribe('error', event => ErrorService.placeError(errorCfg));
+      const listener = this.player.subscribe('error', event => DomService.placeError(errorCfg));
 
       this.listeners.push({ event: 'error', listener: listener });
     });

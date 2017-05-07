@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { VideoService } from './services/video.service';
 import { PlayerService } from './services/player.service';
-import { ErrorService } from './services/error.service';
+import { DomService } from './services/dom.service';
 
 import { YoutubeVideoComponent } from './components/youtube-video/youtube-video.component';
 import { FacebookVideoComponent } from './components/facebook-video/facebook-video.component';
@@ -24,7 +24,7 @@ import { UrlVideoComponent } from './components/url-video/url-video.component';
     FormsModule,
     HttpModule
   ],
-  providers: [VideoService, PlayerService, ErrorService],
+  providers: [VideoService, PlayerService, DomService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

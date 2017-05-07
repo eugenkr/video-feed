@@ -1,7 +1,7 @@
-import { Component, Input, OnInit, ElementRef, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, ElementRef } from '@angular/core';
 
 import { PlayerService } from '../../services/player.service';
-import { ErrorService } from '../../services/error.service';
+import { DomService } from '../../services/dom.service';
 
 import { Video } from '../../types/video';
 
@@ -9,10 +9,10 @@ import { Video } from '../../types/video';
   selector: 'app-youtube-video',
   templateUrl: './youtube-video.component.html'
 })
-export class YoutubeVideoComponent implements OnInit, OnDestroy {
+export class YoutubeVideoComponent implements OnInit {
   private player: any;
 
-  errorMessage = 'Youtube video is unavailable!';
+  errorMessage = 'Youtube video is missing!';
 
   @Input() cfg: Video;
 
@@ -31,11 +31,10 @@ export class YoutubeVideoComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy () {
-    this.player.removeEventListener('onReady', event => this.onReady(event));
-    this.player.removeEventListener('onError', event => this.onError(event));
-  }
-
+  /**
+   * Shows error instead of video
+   * @param {Object} event
+   */
   showError (event) {
     const iFrame = event.target.getIframe();
 
@@ -46,16 +45,27 @@ export class YoutubeVideoComponent implements OnInit, OnDestroy {
       el: this.el.nativeElement
     };
 
-    ErrorService.placeError(errorCfg);
+    DomService.placeError(errorCfg);
   }
 
+  /**
+   * Handler for video 'onReady' event
+   * @param {Object} event
+   */
   onReady (event) {
+    DomService.removeLoader(this.el.nativeElement);
+
     if (event.target && !event.target.getDuration()) {
       this.showError(event);
     }
   }
 
+  /**
+   * Handler for video 'onError' event
+   * @param {Object} event
+   */
   onError (event) {
+    DomService.removeLoader(this.el.nativeElement);
     this.showError(event);
   }
 }

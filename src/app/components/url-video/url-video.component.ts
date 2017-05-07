@@ -1,6 +1,6 @@
 import { Component, Input, ViewChild, OnInit } from '@angular/core';
 
-import { ErrorService } from '../../services/error.service';
+import { DomService } from '../../services/dom.service';
 
 import { Video } from '../../types/video';
 
@@ -13,7 +13,7 @@ export class UrlVideoComponent implements OnInit {
   @ViewChild('videoPlayer') player: any;
   @ViewChild('playerWrapper') wrapper: any;
 
-  errorMessage = 'Video is unavailable!';
+  errorMessage = 'Video is missing!';
 
   ngOnInit () {
     const errorCfg = {
@@ -23,6 +23,7 @@ export class UrlVideoComponent implements OnInit {
       el: this.wrapper.nativeElement
     };
 
-    this.player.nativeElement.addEventListener('error', (e) => ErrorService.placeError(errorCfg));
+    this.player.nativeElement.addEventListener('loadeddata', e => DomService.removeLoader(this.wrapper.nativeElement));
+    this.player.nativeElement.addEventListener('error', e => DomService.placeError(errorCfg));
   }
 }
