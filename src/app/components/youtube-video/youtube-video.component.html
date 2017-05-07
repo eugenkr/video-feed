@@ -1,10 +1,8 @@
 <div class="player-wrapper">
-    <div class="player-header">
-        <div class="title">{{ cfg.title || 'No title' }}</div>
-        <div class="views">{{ cfg.views ? cfg.views + ' views' : 'No views' }}</div>
-    </div>
+    <app-player-header [title]="cfg.title" [views]="cfg.views"></app-player-header>
+
     <div class="player-body">
-        <div><i class="fa fa-cog fa-spin fa-4x fa-fw"></i></div>
+        <div><app-loader></app-loader></div>
         <div id="player-{{ cfg.videoId }}"></div>
     </div>
 </div>

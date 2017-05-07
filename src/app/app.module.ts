@@ -11,13 +11,17 @@ import { DomService } from './services/dom.service';
 import { YoutubeVideoComponent } from './components/youtube-video';
 import { FacebookVideoComponent } from './components/facebook-video';
 import { UrlVideoComponent } from './components/url-video';
+import { PlayerHeaderComponent } from './components/player-header';
+import { LoaderComponent } from './components/loader';
 
 @NgModule({
   declarations: [
     AppComponent,
     YoutubeVideoComponent,
     FacebookVideoComponent,
-    UrlVideoComponent
+    UrlVideoComponent,
+    PlayerHeaderComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
