@@ -10,15 +10,6 @@ export class PlayerService {
   private fbPlayersSubject = new Subject<any>();
 
   /**
-   * Creates Youtube and FB players
-   * @param {Video[]} items - video feed
-   */
-  createPlayers (items) {
-    this.createYoutubePlayers(items);
-    this.createFacebookPlayers();
-  }
-
-  /**
    * Creates the instance of Youtube player
    * @param {Video} cfg - player params
    */

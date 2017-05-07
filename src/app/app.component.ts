@@ -49,13 +49,6 @@ export class AppComponent implements OnInit {
   }
 
   /**
-   * Creates video players
-   */
-  createPlayers () {
-    this.playerService.createPlayers(this.feed);
-  }
-
-  /**
    * Attaches special Youtube API which works with iframe player
    */
   attachYoutubeApi () {
@@ -69,7 +62,7 @@ export class AppComponent implements OnInit {
 
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-    (window as any).onYouTubeIframeAPIReady = () => this.createPlayers();
+    (window as any).onYouTubeIframeAPIReady = () => this.playerService.createYoutubePlayers(this.feed);
   }
 
   /**
@@ -92,5 +85,7 @@ export class AppComponent implements OnInit {
     js.src = this.fbApiUrl;
 
     fjs.parentNode.insertBefore(js, fjs);
+
+    this.playerService.createFacebookPlayers();
   }
 }
